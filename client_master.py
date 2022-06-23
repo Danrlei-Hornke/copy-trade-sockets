@@ -25,6 +25,13 @@ class Client:
 # Criar um cliente
 client = Client("127.0.0.1", 9090)
 
-""" Resposta que o servidor vai fornecer sobre o salvamento dos dados."""
-msg = client.sendData("open:10,close:20,high:30,low:40,volume:50")
+# adicionar um ordem ao servidor
+# add|id_da_ordem|sentido|ativo|entrada|data|quantidade|perda|ganho
+msg = client.sendData("add|12345|BUY|EURUSD|1.10000|01/01/2022 00:00:00|0.01|1.05000|1.15000")
+# atualizar uma ordem no servidor 
+# mod|id_da_ordem|sentido|ativo|entrada|data|quantidade|perda|ganho
+msg = client.sendData("mod|12345|BUY|EURUSD|1.10000|01/01/2022 00:00:00|0.01|1.00000|1.20000")
+# excluir uma ordem no servidor parâmetro 
+# del|id_da_ordem
+msg = client.sendData("del|12345")
 client.showData()
